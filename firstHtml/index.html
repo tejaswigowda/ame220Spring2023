@@ -2,6 +2,19 @@
 <html>
     <head>
         <title>My first HTML</title>
+       <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+-->
+        <style>
+            #asulink{
+                color:green; font-size:20px; font-family: 'Courier New', Courier, monospace;
+            }
+            #naulink{
+                color:red; font-size:20px; font-family: 'Courier New', Courier, monospace;
+            }
+            .link{
+                display:block;
+            }
+        </style>
     </head>
     <body>
         <!-- This is the body tag -->
@@ -14,6 +27,8 @@
             </a>
         </h1>
 
-        <a href="https://asu.edu" target="_blank" style="color:green; font-size:20px; font-family: 'Courier New', Courier, monospace">asu.edu</a>
+
+        <a id="asulink" class='link' href="https://asu.edu" target="_blank" style="">asu.edu</a>
+        <a id="naulink" class='link' href="https://nau.edu" target="_blank" style="">nau.edu</a>
     </body>
 </html> 
