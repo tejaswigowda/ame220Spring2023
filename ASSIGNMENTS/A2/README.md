@@ -17,3 +17,7 @@ Write a simple single page resume (in html). It should have at-least 4-5 section
 
 Section formatting. Use of table, image, hyperlinks and lists.
 
+
+## Guide
+
+<img src='a2.excalidraw.png'>
