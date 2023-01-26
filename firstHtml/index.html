@@ -5,6 +5,16 @@
        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 -->
         <style>
+            body{
+                margin:0;
+                background-color: aqua;
+                background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Edinburgh_Castle_from_Grass_Market.jpg/500px-Edinburgh_Castle_from_Grass_Market.jpg);
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+                background-size: cover;
+                min-height: 100vh;
+
+            }
             #asulink{
                 color:green; font-size:20px; font-family: 'Courier New', Courier, monospace;
             }
@@ -14,6 +24,18 @@
             .link{
                 display:block;
             }
+            a.link{
+                font-weight: bold;
+            }
+            #asulink, #naulink{
+                font-size: 30px;
+            }
+            a.imgLink img:hover{
+                border: 5px solid red;
+            }
+            a.imgLink img:active{
+                border: 5px solid green;
+            }
         </style>
     </head>
     <body>
@@ -22,7 +44,8 @@
             <br>
             My first HTML
             <hr>
-            <a href="https://www.google.com" target="_blank">
+            <a class='imgLink' href="https://www.google.com" target="_blank">
+                An image
                 <img src="https://lh3.googleusercontent.com/4vIWhSoCMzWHL20aDe5EGrv5EypSOWfQjoeBfA9Z32YCinijg5J0S1Sn6FN2uTgbm_A0X0khZHn3Btl2djAqyaXjXpHyADHl4mnlIbc0GRutLqLENkU=w1440-l90-sg-rj-c0xffffff" width="200">
             </a>
         </h1>
