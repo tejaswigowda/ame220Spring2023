@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Slide show - jQuery</title>      
+        <style>
+            body{
+                margin:0;
+                padding:0;
+            }
+            .slide{
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+            }
+            .slide:nth-of-type(1){
+                background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/R%C3%A9union_stonechat_%28Saxicola_tectes%29_male.jpg/450px-R%C3%A9union_stonechat_%28Saxicola_tectes%29_male.jpg)
+            }
+            .slide:nth-of-type(2){
+                background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/European_starling_at_Bodega_Head-1209.jpg/388px-European_starling_at_Bodega_Head-1209.jpg)
+            }
+            .slide:nth-of-type(3){
+                background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mauritius_fody_%28Foudia_rubra%29_male_2.jpg/450px-Mauritius_fody_%28Foudia_rubra%29_male_2.jpg)
+            }
+            .slide:nth-of-type(4){
+                background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Mauritius_kestrel_%28Falco_punctatus%29.jpg/200px-Mauritius_kestrel_%28Falco_punctatus%29.jpg)
+            }
+            .slide:nth-of-type(5){
+                background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Nelson%27s_sparrow_in_marsh.jpg/450px-Nelson%27s_sparrow_in_marsh.jpg)
+            }
+
+        </style>  
+    </head>
+    <body>
+        <div id="slideShow">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        </body>
+</html>
