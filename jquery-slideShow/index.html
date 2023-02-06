@@ -3,6 +3,17 @@
     <head>
         <title>Slide show - jQuery</title>      
         <style>
+            .selected{
+                background-color: #000;
+                color: #fff;
+            }
+            #nav{
+                position:fixed;
+                bottom: 10px;
+                width:80%;
+                left: 10%;
+                text-align: center;
+            }
             body{
                 margin:0;
                 padding:0;
@@ -44,14 +55,47 @@
 
         </style>  
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script> 
+         <script>
+            function goNext(){
+                var current = parseInt($('#slideShow').attr('class'));
+                var next = current + 1;
+                if(next > 5){
+                    next = 1;
+                }
+                goToSlide(next);
+            }
+            function goPrev(){
+                var current = parseInt($('#slideShow').attr('class'));
+                var prev = current - 1;
+                if(prev < 1){
+                    prev = 5;
+                }
+                goToSlide(prev);
+            }
+
+            function goToSlide(current){
+                $('.slide').fadeOut();
+                $('.slide:nth-of-type('+current+')').fadeIn();
+                $("#nav button").removeClass("selected");
+                $("#nav button:nth-of-type("+current+")").addClass("selected");
+                $('#slideShow').attr('class', current);
+            }
+         </script>
     </head>
     <body onload="$('.slide:nth-of-type(1)').fadeIn()">
-        <div id="slideShow">
+        <div id="slideShow" class="1">
             <div class="slide"></div>
             <div class="slide"></div>
             <div class="slide"></div>
             <div class="slide"></div>
             <div class="slide"></div>
+        </div>
+        <div id="nav">
+            <button class="button" onclick="goToSlide(1)">1</button>
+            <button class="button" onclick="goToSlide(2)">2</button>
+            <button class="button" onclick="goToSlide(3)">3</button>
+            <button class="button" onclick="goToSlide(4)">4</button>
+            <button class="button" onclick="goToSlide(5)">5</button>
         </div>
         <button id="prev" onclick="goPrev()">Prev</button>
         <button id="next" onclick="goNext()">Next</button>
