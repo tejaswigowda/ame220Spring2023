@@ -11,6 +11,10 @@
                 width: 100vw;
                 height: 100vh;
                 position: absolute;
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+                background-size: contain;
+                display: none;
             }
             .slide:nth-of-type(1){
                 background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/R%C3%A9union_stonechat_%28Saxicola_tectes%29_male.jpg/450px-R%C3%A9union_stonechat_%28Saxicola_tectes%29_male.jpg)
@@ -29,8 +33,9 @@
             }
 
         </style>  
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script> 
     </head>
-    <body>
+    <body onload="$('.slide:nth-of-type(1)').fadeIn()">
         <div id="slideShow">
             <div class="slide"></div>
             <div class="slide"></div>
@@ -38,5 +43,7 @@
             <div class="slide"></div>
             <div class="slide"></div>
         </div>
+        <button id="prev" onclick="goPrev()">Prev</button>
+        <button id="next" onclick="goNext()">Next</button>
         </body>
 </html>
