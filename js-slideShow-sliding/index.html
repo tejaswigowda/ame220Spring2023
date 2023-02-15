@@ -3,6 +3,14 @@
     <head>
         <title>Slide show - js</title>      
         <style>
+            #slideShow{
+                width: 505vw;
+                height: 100vh;
+                overflow: hidden;
+                margin:0;
+                padding:0;
+                transition: transform 1s;
+            }
             .selected{
                 background-color: #000;
                 color: #fff;
@@ -20,6 +28,7 @@
             body{
                 margin:0;
                 padding:0;
+                overflow: hidden;
             }
             #prev{
                 position:fixed;
@@ -34,12 +43,14 @@
             .slide{
                 width: 100vw;
                 height: 100vh;
-                position: absolute;
+                position: relative;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
                 background-size: contain;
-                opacity: 0;
-                transition: opacity 2s;
+                display: inline-block;
+                margin: 0;
+                padding: 0;
+                border:none;
             }
             .slide:nth-of-type(1){
                 background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/R%C3%A9union_stonechat_%28Saxicola_tectes%29_male.jpg/450px-R%C3%A9union_stonechat_%28Saxicola_tectes%29_male.jpg)
@@ -78,16 +89,8 @@
             function goToSlide(current){
                // $('.slide').fadeOut();
                // $('.slide:nth-of-type('+current+')').fadeIn();
-                var slides = document.getElementsByClassName('slide');
-                for(var i = 0; i < slides.length; i++){
-                    if(i == current-1){
-                        slides[i].style.opacity = '1';
-                    }
-                    else{
-                        slides[i].style.opacity = '0';
-                    }
-                }
 
+               document.getElementById("slideShow").style.transform = "translateX(-"+(current-1)*100+"vw)";
                 //$("#nav button").removeClass("selected");
                 //$("#nav button:nth-of-type("+current+")").addClass("selected");
 
