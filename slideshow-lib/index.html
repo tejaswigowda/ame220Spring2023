@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Slide show - js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+
+<body onload="start()">
+    <div id="slideContainer"></div>
+    <div id="numContainer"></div>
+
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+</body>
+<script>
+    var allImages = [];
+    function start(){
+        var hash = window.location.hash.replace('#', '');
+        allImages = hash.split(',');
+    }
+</script>
+</html>
