@@ -15,6 +15,7 @@
             top: 0;
             left: 0;
         }
+
         .slide {
             width: 100%;
             height: 100%;
@@ -24,12 +25,15 @@
             top: 0;
             left: 0;
             background-repeat: no-repeat;
+            transition: opacity 1s;
         }
+
         #prev {
             position: absolute;
             top: calc(50% - 30px);
             left: 10px;
         }
+
         #next {
             position: absolute;
             top: calc(50% - 30px);
@@ -42,21 +46,66 @@
     <div id="slideContainer"></div>
     <div id="numContainer"></div>
 
-    <a class="btn-floating btn-large waves-effect waves-light black"  href="javascript:goPrev()" id="prev"><i class="material-icons">arrow_back</i></a>
-    <a class="btn-floating btn-large waves-effect waves-light black"  href="javascript:goNext()" id="next"><i class="material-icons">arrow_forward</i></a>
+    <a class="btn-floating btn-large waves-effect waves-light black" href="javascript:goPrev()" id="prev"><i
+            class="material-icons">arrow_back</i></a>
+    <a class="btn-floating btn-large waves-effect waves-light black" href="javascript:goNext()" id="next"><i
+            class="material-icons">arrow_forward</i></a>
 
 </body>
 <script>
     var allImages = [];
-    function start(){
+    function start() {
         var hash = window.location.hash.replace('#', '');
         allImages = hash.split(',');
         var markup = "";
-        for(var i=0; i<allImages.length; i++){
-            markup += "<div style='background-image: url("+allImages[i]+")' class='slide'></div>";
+        for (var i = 0; i < allImages.length; i++) {
+            markup += "<div style='background-image: url(" + allImages[i] + ")' class='slide'></div>";
         }
         console.log(markup);
         document.getElementById('slideContainer').innerHTML = markup;
+        goToSlide(1);
+    }
+
+    function goNext() {
+        var current = parseInt(document.getElementById('slideContainer').className);
+        var next = current + 1;
+        if (next > allImages.length) {
+            next = 1;
+        }
+        goToSlide(next);
+    }
+    function goPrev() {
+        var current = parseInt(document.getElementById('slideContainer').className);
+        var prev = current - 1;
+        if (prev < 1) {
+            prev = allImages.length;
+        }
+        goToSlide(prev);
+    }
+    function goToSlide(current) {
+        var slides = document.getElementsByClassName('slide');
+        for (var i = 0; i < slides.length; i++) {
+            if (i == current - 1) {
+                slides[i].style.opacity = '1';
+            }
+            else {
+                slides[i].style.opacity = '0';
+            }
+        }
+
+
+        var buttons = document.getElementsByClassName('button');
+        for (var i = 0; i < buttons.length; i++) {
+            if (i == current - 1) {
+                buttons[i].className = 'button selected';
+            }
+            else {
+                buttons[i].className = 'button';
+            }
+        }
+
+        document.getElementById('slideContainer').className = current;
     }
 </script>
+
 </html>
