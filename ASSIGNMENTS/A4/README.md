@@ -11,3 +11,9 @@
     - `http://localhost:8080#<comma-separated-list-of-images>,slide` (for sliding animation)
     - `http://localhost:8080#<comma-separated-list-of-images>,fade` (for fading animation)
 
+
+## References
+
+- https://github.com/tejaswigowda/ame220Spring2023/blob/main/js-slideShow-sliding/index.html
+- code handout 
+
