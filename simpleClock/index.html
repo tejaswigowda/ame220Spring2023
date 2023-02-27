@@ -76,7 +76,7 @@
         }
 
         #hour{
-            width: 110px;
+            width: 100px;
             background-color: blue;
         }
 
@@ -126,7 +126,7 @@
         document.getElementById("second").style.transform = "translate(150px,150px) rotate(" + secondAngle + "deg)";
         var minuteAngle = (minute-15) * (360/60);
         document.getElementById("minute").style.transform = "translate(150px,150px) rotate(" + minuteAngle + "deg)";
-        var hourAngle = (hour-3) * (360/12) + (minuteAngle*30/60)
+        var hourAngle = (hour-3) * (360/12) + (minute*30/60)
         document.getElementById("hour").style.transform = "translate(150px,150px) rotate(" + hourAngle + "deg)";
 
     }
