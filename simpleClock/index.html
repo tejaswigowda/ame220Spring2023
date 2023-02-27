@@ -9,6 +9,55 @@
             width: 100vw;
             margin: 0;
         }
+        .notch{
+            position: absolute;
+            transform: translate(150px,0);
+            transform-origin: 0 150px;
+        }
+
+        #hour1{
+            transform:translate(150px,0)  rotate(30deg)
+        }
+
+        #hour2{
+            transform:translate(150px,0)  rotate(60deg)
+        }
+
+        #hour3{
+            transform:translate(150px,0)  rotate(90deg)
+        }
+
+        #hour4{
+            transform:translate(150px,0)  rotate(120deg)
+        }
+
+        #hour5{
+            transform:translate(150px,0)  rotate(150deg)
+        }
+
+        #hour6{
+            transform:translate(150px,0)  rotate(180deg)
+        }
+
+        #hour7{
+            transform:translate(150px,0)  rotate(210deg)
+        }
+
+        #hour8{
+            transform:translate(150px,0)  rotate(240deg)
+        }
+
+        #hour9{
+            transform:translate(150px,0)  rotate(270deg)
+        }
+
+        #hour10{
+            transform:translate(150px,0)  rotate(300deg)
+        }
+
+        #hour11{
+            transform:translate(150px,0)  rotate(330deg)
+        }
         #clock{
             width: 300px;
             height: 300px;
@@ -18,12 +67,35 @@
             left: calc(50% - 150px);
             top: calc(50% - 150px);
         }
+
+        .hand{
+            position: absolute;
+            height: 2px;
+            transform: translate(150px,150px);
+            transform-origin: 0px 0px;
+        }
+
+        #hour{
+            width: 110px;
+            background-color: blue;
+        }
+
+        #minute{
+            width: 135px;
+            background-color: red;
+        }
+
+        #second{
+            width: 150px;
+            background-color: green;
+        }
+
     </style>
     <meta charset="utf-8">
     <title>Simple Clock</title>
     <meta viewport="width=device-width, initial-scale=1">
 </head>
-<body>
+<body onload="setInterval('refreshClock()', 1000)">
     <div id="clock">
         <div class="notch" id="hour12">|</div>
         <div class="notch" id="hour1">|</div>
@@ -43,4 +115,20 @@
         <div class="hand" id="second"></div>
     </div>
 </body>
+<script>
+    function refreshClock(){
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        console.log(hour, minute, second);
+        var secondAngle = (second-15) * (360/60);
+        document.getElementById("second").style.transform = "translate(150px,150px) rotate(" + secondAngle + "deg)";
+        var minuteAngle = (minute-15) * (360/60);
+        document.getElementById("minute").style.transform = "translate(150px,150px) rotate(" + minuteAngle + "deg)";
+        var hourAngle = (hour-3) * (360/12) + (minuteAngle*30/60)
+        document.getElementById("hour").style.transform = "translate(150px,150px) rotate(" + hourAngle + "deg)";
+
+    }
+</script>
 </html>
