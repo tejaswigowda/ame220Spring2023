@@ -66,6 +66,7 @@
             position: absolute;
             left: calc(50% - 150px);
             top: calc(50% - 150px);
+            background-color: white;
         }
 
         .hand{
@@ -95,7 +96,7 @@
     <title>Simple Clock</title>
     <meta viewport="width=device-width, initial-scale=1">
 </head>
-<body onload="setInterval('refreshClock()', 1000)">
+<body onload="start()">
     <div id="clock">
         <div class="notch" id="hour12">|</div>
         <div class="notch" id="hour1">|</div>
@@ -116,11 +117,19 @@
     </div>
 </body>
 <script>
+    var utcoffset = 0;
+    function start(){
+        utcoffset = parseFloat(window.location.hash.replace("#", "")) || 0;
+        refreshClock();
+        setInterval('refreshClock()', 1000)
+    }
     function refreshClock(){
         var now = new Date();
-        var hour = now.getHours();
-        var minute = now.getMinutes();
-        var second = now.getSeconds();
+        var nowmsse = now.getTime() + utcoffset*60*60*1000;
+        now = new Date(nowmsse);
+        var hour = now.getUTCHours(); 
+        var minute = now.getUTCMinutes();
+        var second = now.getUTCSeconds();
         console.log(hour, minute, second);
         var secondAngle = (second-15) * (360/60);
         document.getElementById("second").style.transform = "translate(150px,150px) rotate(" + secondAngle + "deg)";
@@ -129,6 +138,11 @@
         var hourAngle = (hour-3) * (360/12) + (minute*30/60)
         document.getElementById("hour").style.transform = "translate(150px,150px) rotate(" + hourAngle + "deg)";
 
+        if(hour > 6 && hour < 18){
+            document.body.style.filter = "none";
+        }else{
+            document.body.style.filter = "invert(1)";
+        }
     }
 </script>
 </html>
