@@ -18,6 +18,12 @@
                 margin: 0;
                 padding: 0;
             }
+            #backButton{
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                display:none;
+            }
             #tzList button{
                 display:block;
                 width: 100%;
@@ -68,16 +74,44 @@
 
             #tzList button p{
                 position: absolute;
-                width: calc(30vw - 110px);
+                width: calc(100% - 110px);
                 left: 110px;
                 margin-top: 20px;
                 text-align: left;
+            }
+
+            button.selected{
+                background-color: #2ab7a9;
+            }
+
+
+            @media screen and (max-width: 600px){
+                #theList{
+                    width: 100vw;
+                }
+                #details{
+                    width: 100vw;
+                }
+                body.details #backButton{
+                    display: block;
+                }
+                #details{
+                    display: none;
+                }
+                body.details #details{
+                    display: block;
+                }
+                body.details #theList{
+                    display: none;
+                }
             }
         </style>
 
 
     </head>
     <body onload="start()">
+        <a id='backButton' href="javascript:goBack()" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+
         <div id="theList">
             <div id="tzList">
 
@@ -239,13 +273,22 @@
 
 
         function tzSelected(index){
+            $("body").addClass("details");
+            $("#tzList button").removeClass("selected");
+            $("#tzList button:eq("+index+")").addClass("selected");
+
             var tz = selectedTZs[index].split("_")[0];
             var url = "clock.html#" + tz;
             var tzName = $("#timezone option[value="+ selectedTZs[index] +"]").html();
 
-            document.getElementById("details").innerHTML =  "<h2>" + tzName + "</h2>"+
+            document.getElementById("details").innerHTML =  "<h2 style='text-align:center'>" + tzName + "</h2>"+
              "<iframe style='width: 100%;height: 400px; border:none' src='" + url + "'></iframe>";
 
+        }
+
+        function goBack(){
+            $("body").removeClass("details");
+            $("#tzList button").removeClass("selected");
         }
     </script>
 </html>
