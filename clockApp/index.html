@@ -249,6 +249,14 @@
             theModal = M.Modal.init(elems, {onCloseStart:modalClosed});
             elems = document.querySelectorAll('select');
             tzSelect = M.FormSelect.init(elems, {});
+
+
+            var tzs = localStorage.getItem("tzs");
+            if(tzs){
+                selectedTZs = JSON.parse(tzs);
+                $("#timezone").val(selectedTZs);
+                generateList();
+            }
         }
 
         function openModal(){
@@ -261,6 +269,12 @@
             console.log("model closed");
             var tz = tzSelect[0].getSelectedValues();
             selectedTZs = tz;
+            localStorage.setItem("tzs", JSON.stringify(selectedTZs));
+            generateList();
+        }
+
+        function generateList(){
+            var tz = selectedTZs;
             console.log(tz);
             var markup = ""
             for(var i=0; i<tz.length; i++){
