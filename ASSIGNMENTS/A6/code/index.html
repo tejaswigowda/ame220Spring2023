@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Clock App</title>
+        <!-- viewport meta-->
+        <meta name="viewport" content="width=device-width, initial-scale=1 max-scale=1">
+                <!-- jquery -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <! -- materialize icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+        <style>
+            body{
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            #backButton{
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                display:none;
+            }
+            #tzList button{
+                display:block;
+                width: 100%;
+                height: 100px;
+            }
+            #tzList iframe{
+                width: 300px;
+                height: 300px;
+                border: none;
+                float: left;
+                transform: scale(.3);
+                transform-origin: 0 0;
+                overflow: hidden;
+            }
+            #modal1{
+                width: 80vw;
+                height: 100vh;
+                position: absolute;
+                left: 10vw;
+                background: transparent;
+                box-shadow: none;
+                overflow: hidden;
+            }
+            #tzList{
+                width: 100%;
+                height: 100%;
+                overflow-y: scroll;
+            }
+            #theList{
+                width: 30vw;
+                height: 100vh;
+                position: absolute;
+                left: 0;
+                top: 0;
+                background-color: lightblue;
+            }
+            #details{
+                width: 70vw;
+                height: 100vh;
+                position: absolute;
+                right: 0;
+                top: 0;
+                background-color: lightgreen;
+            }
+            #editButton{
+                position: absolute;
+                bottom: 5px;
+                right: 5px;
+            }
+            .select-wrapper ul{
+                min-width: 100%;
+            }
+
+            #tzList button p{
+                position: relative;
+                width: calc(100% - 110px);
+                margin-top: -280px;
+                text-align: left;
+                float: right;
+            }
+
+            button.selected{
+                background-color: #2ab7a9;
+            }
+
+
+            @media screen and (max-width: 600px){
+                #theList{
+                    width: 100vw;
+                }
+                #details{
+                    width: 100vw;
+                }
+                body.details #backButton{
+                    display: block;
+                }
+                #details{
+                    display: none;
+                }
+                body.details #details{
+                    display: block;
+                }
+                body.details #theList{
+                    display: none;
+                }
+            }
+        </style>
+
+
+    </head>
+    <body onload="start()">
+        <a id='backButton' href="javascript:goBack()" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+
+        <div id="theList">
+            <div id="tzList">
+
+            </div>
+
+            <a id='editButton' href="javascript:openModal()" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">create</i></a>
+
+        </div>
+
+        <div id="details">
+
+        </div>
+
+          <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Choose timezones</h4>
+      <select name="timezone" id="timezone" multiple>
+        <option value="-12_0">(UTC-12:00) International Date Line West</option>
+        <option value="-11_1">(UTC-11:00) Coordinated Universal Time-11</option>
+        <option value="-10_2">(UTC-10:00) Hawaii</option>
+        <option value="-9_3">(UTC-09:00) Alaska</option>
+        <option value="-8_4">(UTC-08:00) Baja California</option>
+        <option value="-7_5">(UTC-07:00) Pacific Time (US &amp; Canada)</option>
+        <option value="-8_6">(UTC-08:00) Pacific Time (US &amp; Canada)</option>
+        <option value="-7_7">(UTC-07:00) Arizona</option>
+        <option value="-6_8">(UTC-07:00) Chihuahua, La Paz, Mazatlan</option>
+        <option value="-6_9">(UTC-07:00) Mountain Time (US &amp; Canada)</option>
+        <option value="-6_0">(UTC-06:00) Central America</option>
+        <option value="-5_1">(UTC-05:00) Central Time (US &amp; Canada)</option>
+        <option value="-5_2">(UTC-05:00) Guadalajara, Mexico City, Monterrey</option>
+        <option value="-6_3">(UTC-06:00) Saskatchewan</option>
+        <option value="-5_4">(UTC-05:00) Bogota, Lima, Quito</option>
+        <option value="-4_5">(UTC-05:00) Eastern Time (US &amp; Canada)</option>
+        <option value="-4_6">(UTC-05:00) Indiana (East)</option>
+        <option value="-4.5_7">(UTC-04:30) Caracas</option>
+        <option value="-4_8">(UTC-04:00) Asuncion</option>
+        <option value="-3_9">(UTC-04:00) Atlantic Time (Canada)</option>
+        <option value="-4_0">(UTC-04:00) Cuiaba</option>
+        <option value="-4_1">(UTC-04:00) Georgetown, La Paz, Manaus, San Juan</option>
+        <option value="-4_2">(UTC-04:00) Santiago</option>
+        <option value="-2.5_3">(UTC-03:30) Newfoundland</option>
+        <option value="-3_4">(UTC-03:00) Brasilia</option>
+        <option value="-3_5">(UTC-03:00) Buenos Aires</option>
+        <option value="-3_6">(UTC-03:00) Cayenne, Fortaleza</option>
+        <option value="-3_7">(UTC-03:00) Greenland</option>
+        <option value="-3_8">(UTC-03:00) Montevideo</option>
+        <option value="-3_9">(UTC-03:00) Salvador</option>
+        <option value="-2_0">(UTC-02:00) Coordinated Universal Time-02</option>
+        <option value="-1_1">(UTC-02:00) Mid-Atlantic - Old</option>
+        <option value="0_2">(UTC-01:00) Azores</option>
+        <option value="-1_3">(UTC-01:00) Cape Verde Is.</option>
+        <option value="1_4">(UTC) Casablanca</option>
+        <option value="0_5">(UTC) Coordinated Universal Time</option>
+        <option value="0_6">(UTC) Edinburgh, London</option>
+        <option value="1_7">(UTC+01:00) Edinburgh, London</option>
+        <option value="1_8">(UTC) Dublin, Lisbon</option>
+        <option value="0_9">(UTC) Monrovia, Reykjavik</option>
+        <option value="2_0">(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+        <option value="2_1">(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+        <option value="2_2">(UTC+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+        <option value="2_3">(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+        <option value="1_4">(UTC+01:00) West Central Africa</option>
+        <option value="1_5">(UTC+01:00) Windhoek</option>
+        <option value="3_6">(UTC+02:00) Athens, Bucharest</option>
+        <option value="3_7">(UTC+02:00) Beirut</option>
+        <option value="2_8">(UTC+02:00) Cairo</option>
+        <option value="3_9">(UTC+02:00) Damascus</option>
+        <option value="3_0">(UTC+02:00) E. Europe</option>
+        <option value="2_1">(UTC+02:00) Harare, Pretoria</option>
+        <option value="3_2">(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+        <option value="3_3">(UTC+03:00) Istanbul</option>
+        <option value="3_4">(UTC+02:00) Jerusalem</option>
+        <option value="2_5">(UTC+02:00) Tripoli</option>
+        <option value="3_6">(UTC+03:00) Amman</option>
+        <option value="3_7">(UTC+03:00) Baghdad</option>
+        <option value="3_8">(UTC+02:00) Kaliningrad</option>
+        <option value="3_9">(UTC+03:00) Kuwait, Riyadh</option>
+        <option value="3_0">(UTC+03:00) Nairobi</option>
+        <option value="3_1">(UTC+03:00) Moscow, St. Petersburg, Volgograd, Minsk</option>
+        <option value="4_2">(UTC+04:00) Samara, Ulyanovsk, Saratov</option>
+        <option value="4.5_3">(UTC+03:30) Tehran</option>
+        <option value="4_4">(UTC+04:00) Abu Dhabi, Muscat</option>
+        <option value="5_5">(UTC+04:00) Baku</option>
+        <option value="4_6">(UTC+04:00) Port Louis</option>
+        <option value="4_7">(UTC+04:00) Tbilisi</option>
+        <option value="4_8">(UTC+04:00) Yerevan</option>
+        <option value="4.5_9">(UTC+04:30) Kabul</option>
+        <option value="5_0">(UTC+05:00) Ashgabat, Tashkent</option>
+        <option value="5_1">(UTC+05:00) Yekaterinburg</option>
+        <option value="5_2">(UTC+05:00) Islamabad, Karachi</option>
+        <option value="5.5_3">(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+        <option value="5.5_4">(UTC+05:30) Sri Jayawardenepura</option>
+        <option value="5.75_5">(UTC+05:45) Kathmandu</option>
+        <option value="6_6">(UTC+06:00) Nur-Sultan (Astana)</option>
+        <option value="6_7">(UTC+06:00) Dhaka</option>
+        <option value="6.5_8">(UTC+06:30) Yangon (Rangoon)</option>
+        <option value="7_9">(UTC+07:00) Bangkok, Hanoi, Jakarta</option>
+        <option value="7_0">(UTC+07:00) Novosibirsk</option>
+        <option value="8_1">(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+        <option value="8_2">(UTC+08:00) Krasnoyarsk</option>
+        <option value="8_3">(UTC+08:00) Kuala Lumpur, Singapore</option>
+        <option value="8_4">(UTC+08:00) Perth</option>
+        <option value="8_5">(UTC+08:00) Taipei</option>
+        <option value="8_6">(UTC+08:00) Ulaanbaatar</option>
+        <option value="8_7">(UTC+08:00) Irkutsk</option>
+        <option value="9_8">(UTC+09:00) Osaka, Sapporo, Tokyo</option>
+        <option value="9_9">(UTC+09:00) Seoul</option>
+        <option value="9.5_0">(UTC+09:30) Adelaide</option>
+        <option value="9.5_1">(UTC+09:30) Darwin</option>
+        <option value="10_2">(UTC+10:00) Brisbane</option>
+        <option value="10_3">(UTC+10:00) Canberra, Melbourne, Sydney</option>
+        <option value="10_4">(UTC+10:00) Guam, Port Moresby</option>
+        <option value="10_5">(UTC+10:00) Hobart</option>
+        <option value="9_6">(UTC+09:00) Yakutsk</option>
+        <option value="11_7">(UTC+11:00) Solomon Is., New Caledonia</option>
+        <option value="11_8">(UTC+11:00) Vladivostok</option>
+        <option value="12_9">(UTC+12:00) Auckland, Wellington</option>
+        <option value="12_0">(UTC+12:00) Coordinated Universal Time+12</option>
+        <option value="12_1">(UTC+12:00) Fiji</option>
+        <option value="12_2">(UTC+12:00) Magadan</option>
+        <option value="13_3">(UTC+12:00) Petropavlovsk-Kamchatsky - Old</option>
+        <option value="13_4">(UTC+13:00) Nuku'alofa</option>
+        <option value="13_5">(UTC+13:00) Samoa</option>
+    </select>
+
+    </div>
+
+  </div>
+    </body>
+    <script>
+        var tzSelect, theModal;
+        function start(){
+            var elems = document.querySelectorAll('#modal1');
+            theModal = M.Modal.init(elems, {onCloseStart:modalClosed});
+            elems = document.querySelectorAll('select');
+            tzSelect = M.FormSelect.init(elems, {});
+
+
+            var tzs = localStorage.getItem("tzs");
+            if(tzs){
+                selectedTZs = JSON.parse(tzs);
+                $("#timezone").val(selectedTZs);
+                generateList();
+            }
+        }
+
+        function openModal(){
+            theModal[0].open();
+            $(".select-dropdown.dropdown-trigger")[0].click()
+        }
+
+        var selectedTZs = [];
+        function modalClosed(){
+            console.log("model closed");
+            var tz = tzSelect[0].getSelectedValues();
+            selectedTZs = tz;
+            localStorage.setItem("tzs", JSON.stringify(selectedTZs));
+            generateList();
+        }
+
+        function generateList(){
+            var tz = selectedTZs;
+            console.log(tz);
+            var markup = ""
+            for(var i=0; i<tz.length; i++){
+                markup += "<button onclick='tzSelected(" + i + ")'> <iframe src='clock.html#" + tz[i].split("_")[0] + "'></iframe>"+
+                    "<p>" + $("#timezone option[value='"+ tz[i] +"']").html() + "</p>" +
+                    " </button>";
+            }
+            document.getElementById("tzList").innerHTML = markup;
+        }
+
+
+        function tzSelected(index){
+            $("body").addClass("details");
+            $("#tzList button").removeClass("selected");
+            $("#tzList button:eq("+index+")").addClass("selected");
+
+            var tz = selectedTZs[index].split("_")[0];
+            var url = "clock.html#" + tz;
+            var tzName = $("#timezone option[value='"+ selectedTZs[index] +"']").html();
+
+            document.getElementById("details").innerHTML =  "<h2 style='text-align:center'>" + tzName + "</h2>"+
+             "<iframe style='width: 100%;height: 400px; border:none' src='" + url + "'></iframe>";
+
+        }
+
+        function goBack(){
+            $("body").removeClass("details");
+            $("#tzList button").removeClass("selected");
+        }
+    </script>
+</html>

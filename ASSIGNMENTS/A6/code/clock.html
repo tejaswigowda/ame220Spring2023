@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+        }
+        .notch{
+            position: absolute;
+            transform: translate(150px,0);
+            transform-origin: 0 150px;
+        }
+
+        #hour1{
+            transform:translate(150px,0)  rotate(30deg)
+        }
+
+        #hour2{
+            transform:translate(150px,0)  rotate(60deg)
+        }
+
+        #hour3{
+            transform:translate(150px,0)  rotate(90deg)
+        }
+
+        #hour4{
+            transform:translate(150px,0)  rotate(120deg)
+        }
+
+        #hour5{
+            transform:translate(150px,0)  rotate(150deg)
+        }
+
+        #hour6{
+            transform:translate(150px,0)  rotate(180deg)
+        }
+
+        #hour7{
+            transform:translate(150px,0)  rotate(210deg)
+        }
+
+        #hour8{
+            transform:translate(150px,0)  rotate(240deg)
+        }
+
+        #hour9{
+            transform:translate(150px,0)  rotate(270deg)
+        }
+
+        #hour10{
+            transform:translate(150px,0)  rotate(300deg)
+        }
+
+        #hour11{
+            transform:translate(150px,0)  rotate(330deg)
+        }
+        #clock{
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid black;
+            position: absolute;
+            left: calc(50% - 150px);
+            top: calc(50% - 150px);
+            background-color: white;
+        }
+
+        .hand{
+            position: absolute;
+            height: 2px;
+            transform: translate(150px,150px);
+            transform-origin: 0px 0px;
+        }
+
+        #hour{
+            width: 100px;
+            background-color: blue;
+        }
+
+        #minute{
+            width: 135px;
+            background-color: red;
+        }
+
+        #second{
+            width: 150px;
+            background-color: green;
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <title>Simple Clock</title>
+    <meta viewport="width=device-width, initial-scale=1">
+</head>
+<body onload="start()">
+    <div id="clock">
+        <div class="notch" id="hour12">|</div>
+        <div class="notch" id="hour1">|</div>
+        <div class="notch" id="hour2">|</div>
+        <div class="notch" id="hour3">|</div>
+        <div class="notch" id="hour4">|</div>
+        <div class="notch" id="hour5">|</div>
+        <div class="notch" id="hour6">|</div>
+        <div class="notch" id="hour7">|</div>
+        <div class="notch" id="hour8">|</div>
+        <div class="notch" id="hour9">|</div>
+        <div class="notch" id="hour10">|</div>
+        <div class="notch" id="hour11">|</div>
+
+        <div class="hand" id="minute"></div>
+        <div class="hand" id="hour"></div>
+        <div class="hand" id="second"></div>
+    </div>
+</body>
+<script>
+    var utcoffset = 0;
+    function start(){
+        utcoffset = parseFloat(window.location.hash.replace("#", "")) || 0;
+        refreshClock();
+        setInterval('refreshClock()', 1000)
+    }
+    function refreshClock(){
+        var now = new Date();
+        var nowmsse = now.getTime() + utcoffset*60*60*1000;
+        now = new Date(nowmsse);
+        var hour = now.getUTCHours(); 
+        var minute = now.getUTCMinutes();
+        var second = now.getUTCSeconds();
+        //console.log(hour, minute, second);
+        var secondAngle = (second-15) * (360/60);
+        document.getElementById("second").style.transform = "translate(150px,150px) rotate(" + secondAngle + "deg)";
+        var minuteAngle = (minute-15) * (360/60);
+        document.getElementById("minute").style.transform = "translate(150px,150px) rotate(" + minuteAngle + "deg)";
+        var hourAngle = (hour-3) * (360/12) + (minute*30/60)
+        document.getElementById("hour").style.transform = "translate(150px,150px) rotate(" + hourAngle + "deg)";
+
+        if(hour > 6 && hour < 18){
+            document.body.style.filter = "none";
+        }else{
+            document.body.style.filter = "invert(1)";
+        }
+    }
+</script>
+</html>
