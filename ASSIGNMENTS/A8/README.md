@@ -8,4 +8,4 @@ height and width of the required image from the user.
 
 ## Reference
 
-https://github.com/tejaswigowda/ame220Fall2023/tree/main/imageResize
+https://github.com/tejaswigowda/ame220Spring2023/tree/main/imageResize
