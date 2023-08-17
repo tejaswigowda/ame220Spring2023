@@ -4,9 +4,9 @@
 
 ## Task
 
-Create a private github repository called `AME220Spring2023` and add me
-(`tejaswigowda`) as
-a collaborator. The repository should contain a `README.md` that has the
+Create a private github repository called `AME220` and add me
+(`tejaswigowda`) and TA Bhargav (`BhargavR47`) as
+a collaborators. The repository should contain a `README.md` that has the
 following information:
 
 1. Your full name
